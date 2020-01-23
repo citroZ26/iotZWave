@@ -1,0 +1,39 @@
+var ZWave = require('openzwave-shared');
+var os = require('os');
+
+const mariadb = require("mariadb");
+const express = require('express');
+const app = express();
+
+app.get('/', function(req,res) {
+  res.send('Hello express work')
+});
+
+app.get('/api',function(req,res){
+  connectToBdd().then(function(conn){
+    conn.query("select * from valeurs").then(function(rows){
+	rows.meta = undefined;
+	res.json([rows]);
+    });
+  });
+});
+
+app.listen(3000, function(){console.log('wassup')});
+
+
+function connectToBdd(){
+  return mariadb.createConnection({
+    host: 'localhost', 
+    user:'iotUser',
+    database: 'iot'
+  })
+  .catch(err => {
+    console.log("not connected due to error: " + err);
+  });
+}
+
+/*connectToBdd().then(conn => {
+  console.log("connected ! connection id is " + conn.threadId);
+  conn.query("SELECT * FROM valeurs")
+    .then(function(rows){
+      console.log("rows");

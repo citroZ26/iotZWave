@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>IOT - Date</title>
+    </head>
+
+    <body>
+        <h1 class="text-center">SELECTIONNER UNE DONNEE:</h1>
+
+        <br><br>
+        
+        <form id="form1" class="text-center" action="graphique.html" method="" onsubmit="testcheck(event)">
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="capteur1" name="capteur" value="capteur1" class="custom-control-input">
+                <label class="custom-control-label" for="capteur1">Capteur 1</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="capteur2" name="capteur" value="capteur2" class="custom-control-input">
+                <label class="custom-control-label" for="capteur2">Capteur 2</label>
+            </div>
+            <br><br>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="donnee1" name="radio" value="temperature" class="custom-control-input">
+                <label class="custom-control-label" for="donnee1">Température</label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="donnee2" name="radio" value="humidite" class="custom-control-input">
+                <label class="custom-control-label" for="donnee2">Humidité</label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="donnee3" name="radio" value="luminosite" class="custom-control-input">
+                <label class="custom-control-label" for="donnee3">Lumière</label>
+            </div>
+
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="donnee4" name="radio" value="uv" class="custom-control-input">
+                <label class="custom-control-label" for="donnee4">UV</label>
+            </div>
+
+              <br>
+              <br>
+              
+              <button class="btn btn-primary btn-lg btn-block" type="submit">GO!</button>
+            </form>
+
+        <script>
+            function testcheck(event)
+            {
+                $test=false;
+                for ($i=1; $i<=2; $i++)
+                {
+                    $choix=document.getElementById('capteur'+$i).checked;
+                    if ($choix==true)
+                    {
+                        $choix = false;
+                        for ($i=1; $i<=4; $i++) {
+                            $choix=document.getElementById('donnee'+$i).checked;
+                            if ($choix==true) {
+                                $test = true;
+                            }
+                        }
+                    }
+                }
+                if ($test==true)
+                {
+                    document.getElementById('form1').submit();
+                }else{
+                    alert("Vous devez choisir 1 capteur et 1 donnée :");
+                    event.preventDefault();
+                }
+            }
+        </script>
+
+    </body>
+</html>
